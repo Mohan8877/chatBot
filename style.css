@@ -1,0 +1,368 @@
+body{
+  margin:0;
+  font-family:'Outfit',sans-serif;
+  background:#f4f6f9;
+  color:#333;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+.container{
+  width:100%;
+  max-width:600px;
+  background:#fff;
+  border-radius:20px;
+  box-shadow:0 0 30px rgba(0,0,0,0.08);
+  padding:20px;
+  display:flex;
+  flex-direction:column;
+}
+.avatar{
+  text-align:center;
+}
+.avatar img{
+  width:90px;
+  animation:float 3s ease-in-out infinite;
+}
+@keyframes float{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-10px);}
+}
+.typing-indicator{
+  margin-top:10px;
+  display:none;
+  font-size:1.2rem;
+  color:#888;
+  letter-spacing:4px;
+}
+.typing-indicator span{
+  animation:blink 1s infinite;
+  font-size:2rem;
+  display:inline-block;
+}
+.typing-indicator span:nth-child(2){
+  animation-delay:0.2s;
+}
+.typing-indicator span:nth-child(3){
+  animation-delay:0.4s;
+}
+@keyframes blink{
+  0%{opacity:0.2;}
+  20%{opacity:1;}
+  100%{opacity:0.2;}
+}
+.chat-box{
+  height:300px;
+  overflow-y:auto;
+  background:#f0f2f7;
+  padding:15px;
+  border-radius:12px;
+  margin:20px 0;
+  box-shadow:inset 0 0 10px rgba(0,0,0,0.03);
+  scrollbar-width:none;
+  -ms-overflow-style:none;
+}
+.chat-box::-webkit-scrollbar{
+display:none;
+}
+.chat-box .message{
+  background:linear-gradient(135deg,#eef1f5,#dce3eb);
+  color:#333;
+  padding:10px 15px;
+  border-radius:15px;
+  margin-bottom:10px;
+  width:fit-content;
+  max-width:80%;
+}
+.chat-box .message.user{
+  background:linear-gradient(to right,#00f2fe,#4facfe);
+  color:white;
+  align-self:flex-end;
+  border-bottom-right-radius:0;
+}
+.chat-box .message.bot{
+  background:linear-gradient(to right,#ece9e6,#ffffff);
+  align-self:flex-start;
+  border-bottom-left-radius:0;
+}
+.input-area{
+  display:flex;
+  gap:10px;
+}
+input{
+  flex:1;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #ccc;
+  outline:none;
+  font-size:1rem;
+  background:#f9f9f9;
+  transition:0.3s;
+}
+input:focus{
+  border-color:#00f2fe;
+  background:#fff;
+}
+button{
+  padding:10px 16px;
+  border:none;
+  border-radius:10px;
+  background:linear-gradient(to right,#00f2fe,#4facfe);
+  cursor:pointer;
+  color:white;
+  font-weight:bold;
+  font-size:1.2rem;
+  transition:0.3s;
+}
+button:hover{
+  transform:scale(1.05);
+}
+.mode-toggle{
+  display:flex;
+  justify-content:flex-end;
+  margin-bottom:10px;
+}
+.switch{
+  position:relative;
+  display:inline-block;
+  width:50px;
+  height:26px;
+}
+.switch input{
+  opacity:0;
+  width:0;
+  height:0;
+}
+.slider{
+  position:absolute;
+  cursor:pointer;
+  top:0;left:0;right:0;bottom:0;
+  background-color:#ccc;
+  transition:0.4s;
+  border-radius:34px;
+}
+.slider:before{
+  position:absolute;
+  content:"";
+  height:20px;width:20px;
+  left:3px;bottom:3px;
+  background-color:white;
+  transition:0.4s;
+  border-radius:50%;
+}
+input:checked+.slider{
+  background-color:#4facfe;
+}
+input:checked+.slider:before{
+  transform:translateX(24px);
+}
+body.dark{
+  background:radial-gradient(ellipse at bottom,#1b2735 0%,#090a0f 100%);
+  color:#eee;
+  transition:background 0.6s ease;
+}
+body.dark .container{
+  background:rgba(255,255,255,0.04);
+  box-shadow:0 0 50px rgba(0,255,255,0.2);
+  backdrop-filter:blur(20px);
+}
+body.dark .chat-box{
+  background:rgba(255,255,255,0.05);
+  box-shadow:inset 0 0 12px rgba(255,255,255,0.03);
+}
+body.dark .message.user{
+  background:linear-gradient(to right,#4facfe,#00f2fe);
+  color:white;
+}
+body.dark .message.bot{
+  background:linear-gradient(to right,#1e293b,#334155);
+  color:#e0e0e0;
+}
+body.dark .input-area input{
+  background:rgba(255,255,255,0.07);
+  color:white;
+  border:1px solid #4facfe;
+}
+body.dark .input-area input::placeholder{
+  color:#aaa;
+}
+body.dark button{
+  background:linear-gradient(to right,#1e3c72,#2a5298);
+  color:white;
+}
+body.dark::before{
+  content:'';
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  z-index:-1;
+  background:transparent url('https://raw.githubusercontent.com/lokesh-coder/pretty-starry-night/main/star-bg.png') repeat;
+  animation:starScroll 100s linear infinite;
+  opacity:0.5;
+}
+@keyframes starScroll{
+  0%{background-position:0 0;}
+  100%{background-position:10000px 10000px;}
+}
+.falling-stars{
+  position:fixed;
+  width:100%;
+  height:100%;
+  top:0;left:0;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:-1;
+}
+.falling-stars span{
+  position:absolute;
+  display:block;
+  width:2px;
+  height:80px;
+  background:linear-gradient(transparent,white);
+  animation:fall linear infinite;
+  opacity:0.6;
+  border-radius:50%;
+  box-shadow:0 0 8px rgba(255,255,255,0.6);
+}
+@keyframes fall{
+0%{
+  transform:translateY(-100px) translateX(0px) rotate(30deg);
+  opacity:1;
+}
+
+100%{
+  transform:translateY(100vh) translateX(-50px) rotate(30deg);
+  opacity:0;
+}
+}
+body:not(.dark) .falling-stars{
+  display:none;
+}
+.shining-stars{
+  position:fixed;
+  top:0;left:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  z-index:-2;
+}
+.shining-stars .star{
+  position:absolute;
+  width:2px;
+  height:2px;
+  background:white;
+  border-radius:50%;
+  box-shadow:0 0 6px white;
+  animation:twinkle 2s infinite ease-in-out alternate;
+}
+@keyframes twinkle{
+  0%{opacity:0.2;transform:scale(1);}
+  100%{opacity:1;transform:scale(1.5);}
+}
+body:not(.dark) .shining-stars{
+  display:none;
+}
+.toggle-label{
+  width:60px;
+  height:30px;
+  background:linear-gradient(to right,#f5f7fa,#c3cfe2);
+  border-radius:50px;
+  position:relative;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  padding:2px;
+  box-shadow:inset 0 0 8px rgba(0,0,0,0.1);
+}
+.toggle-label .toggle-thumb{
+  width:26px;
+  height:26px;
+  background:white;
+  border-radius:50%;
+  position:absolute;
+  left:2px;
+  transition:all 0.4s ease;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.icon{
+  width:16px;
+  height:16px;
+  position:absolute;
+  opacity:0;
+  transition:opacity 0.4s ease;
+}
+.sun{
+  background:radial-gradient(circle,#FFD93B 40%,transparent 41%);
+  box-shadow:0 0 4px #FFD93B,0 0 10px #FFD93B;
+  border-radius:50%;
+  opacity:1;
+}
+.sun::before{
+  content:"";
+  position:absolute;
+  width:30px;
+  height:30px;
+  background:radial-gradient(circle,rgba(255,255,255,0.4),transparent);
+  border-radius:50%;
+  top:-7px;
+  left:-7px;
+  z-index:-1;
+}
+.moon{
+  background:radial-gradient(circle at 30% 30%,#f0f0f0 60%,#bbb 61%);
+  border-radius:50%;
+  opacity:0;
+}
+input[type="checkbox"]{
+  display:none;
+}
+input[type="checkbox"]:checked+.toggle-label{
+  background:linear-gradient(to right,#222,#555);
+}
+input[type="checkbox"]:checked+.toggle-label .toggle-thumb{
+  left:32px;
+  background:#1e1e2f;
+}
+input[type="checkbox"]:checked+.toggle-label .sun{
+  opacity:0;
+}
+input[type="checkbox"]:checked+.toggle-label .moon{
+  opacity:1;
+}
+.sunlight-rays{
+  position:fixed;
+  width:100%;
+  height:100%;
+  top:0;left:0;
+  overflow:hidden;
+  z-index:-2;
+  pointer-events:none;
+}
+.sunlight-rays .ray{
+  position:absolute;
+  width:200%;
+  height:300px;
+  background:radial-gradient(circle,rgba(255,220,100,0.2) 10%,transparent 70%);
+  transform:rotate(30deg);
+  animation:moveRay 8s linear infinite;
+  opacity:0.5;
+  filter:blur(20px);
+  border-radius:50%;
+}
+
+.ray1{top:-100px;left:-50%;animation-delay:0s;}
+.ray2{top:200px;left:-60%;animation-delay:2s;}
+.ray3{top:400px;left:-70%;animation-delay:4s;}
+.ray4{top:600px;left:-40%;animation-delay:6s;}
+
+@keyframes moveRay{
+  0%{transform:rotate(30deg) translateX(0px);opacity:0.3;}
+  50%{transform:rotate(30deg) translateX(50px);opacity:0.6;}
+  100%{transform:rotate(30deg) translateX(0px);opacity:0.3;}
+}
+body.dark .sunlight-rays{
+ display:none;
+}
