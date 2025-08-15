@@ -58,7 +58,7 @@ def chat():
         "messages": messages
     }
 
-    response = requests.post(url, headers=headers, json=data)
+    response=requests.post(url, headers=headers, json=data)
 
     if response.status_code == 200:
         assistant_reply = response.json()["choices"][0]["message"]["content"]
